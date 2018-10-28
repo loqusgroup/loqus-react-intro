@@ -1,6 +1,6 @@
 # Introduction to React, at Loqus
 
-A quick course for newly recruited [Loqus](http://www.loqusgroup.com/) developers to get them introduced to React.
+A quick course for newly recruited [Loqus](http://www.loqusgroup.com/) developers to get them introduced to [React](https://reactjs.org/).
 
 Here you can find the example project's code covered in the course. Start by:
 
