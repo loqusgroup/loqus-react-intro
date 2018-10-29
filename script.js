@@ -1,36 +1,36 @@
-// let's start by "translating" the below component
-// which now we've commented-out
-// function Trello() {
-//   return (
-//     <div className="note">
-//       <h2>Note</h2>
-//       <h3>Edit/Remove</h3>
-//     </div>
-//   );
-// }
-
 class Trello extends React.Component {
 
   render() {
     return (
       <div className="note">
         <h2>{this.props.title} from {this.props.user}</h2>
-        <h3>Edit/Remove</h3> 
+        <p>{this.props.children}</p>
       </div>
     )
   }
 }
 
-ReactDOM.render( 
-  <Trello title="Note" user="Joe" />,
-  document.getElementById('content') )
+// so far we've always passed multiple components
+// directly to ReactDOM, and although functional,
+// Good Programming Practices for React dictates
+// creating a Layout component to hold the needed components
 
-// after comment-out the abouve ReactDOM,
-// uncomment the below and look at the browser.
+function Layout(props) {
+  return (
+    <div>
 
-// ReactDOM.render(
-//   <div>
-//     <Trello title="Note" user="Joe" />
-//     <Trello title="Comment" user="Neil" />
-//   </div>,
-//   document.getElementById('content') )
+      <Trello title="Note" user="John">
+        <button className="btn-info">Edit / Save</button>
+      </Trello>
+
+      <Trello title="Comment" user="Jane">
+        children as dud-button text
+      </Trello>
+
+    </div>
+  )
+}
+
+const content = document.getElementById('content');
+
+ReactDOM.render( <Layout />, content );
