@@ -1,36 +1,42 @@
-class Trello extends React.Component {
+class Counter extends React.Component {
+  // to store state properly, we need to call
+  // the class constructor and super
+  constructor(props) {
+    super(props);
 
-  edit() {
-    console.log('Editing Note');
+    // initializing state with key num / value 0
+    this.state = {
+      num: 0
+    }
   }
 
-  remove() {
-    console.log('Remove Note');
+  increase() {
+    // .setState is a method in React
+    // that allows us to directly mutate the state properties
+    // here we are overwriting `num` by adding 1
+    this.setState({ num: this.state.num + 1 })
+  }
+
+  decrease() {
+    // here we are overwriting `num` by decreasing 1
+    this.setState({ num: this.state.num - 1 })
   }
 
   render() {
     return (
       <div className="note">
-        <div className="text">{this.props.children}</div>
-        <button onClick={()=>this.edit()} className="btn-primary">Edit</button>
-        <button onClick={()=>this.remove()} className="btn-danger">Remove</button>
+        <div className="text">State is holding: <strong>{this.state.num}</strong></div>
+        <button onClick={()=>this.increase()} className="btn-primary">Increase</button>
+        <button onClick={()=>this.decrease()} className="btn-danger">Decrease</button>
       </div>
     )
   }
 }
 
-// the elements' class names used are directly from Twitter's bootstrap CSS styles
-
-function Layout(props) {
-  return (
-    <div className="board">
-      <Trello>This is note 1</Trello>
-      <Trello>This is note 2</Trello>
-    </div>
-  )
-}
+// since we're only using 1 component, there is
+// no need for a Layout "skeleton"
 
 
 const content = document.getElementById('content');
 
-ReactDOM.render( <Layout />, content );
+ReactDOM.render( <Counter />, content );
