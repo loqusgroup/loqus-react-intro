@@ -1,42 +1,35 @@
 class Trello extends React.Component {
 
-  clicker() {
-    console.log(`This displays children passed: \n ${this.props.children}`);
-    // for the above we need to open up the browser's Dev Tools => JS Console
-    // the below shows up as alert, in case you cannot find the JS Console
-    alert(this.props.children);
+  edit() {
+    console.log('Editing Note');
+  }
+
+  remove() {
+    console.log('Remove Note');
   }
 
   render() {
     return (
       <div className="note">
-        <h2>{this.props.title} from {this.props.user}</h2>
-        <p onClick={()=>this.clicker()}>{this.props.children}</p>
+        <div className="text">{this.props.children}</div>
+        <button onClick={()=>this.edit()} className="btn-primary">Edit</button>
+        <button onClick={()=>this.remove()} className="btn-danger">Remove</button>
       </div>
     )
   }
 }
 
+// the elements' class names used are directly from Twitter's bootstrap CSS styles
 
 function Layout(props) {
   return (
-    <div>
-
-      <Trello title="Note" user="John">
-        <button className="btn-info">Edit / Save</button>  {/* <= anything here is children */}
-      </Trello>
-
-      <Trello title="Comment" user="Jane">
-        children as dud-button text {/* <= anything here is children */}
-      </Trello>
-
+    <div className="board">
+      <Trello>This is note 1</Trello>
+      <Trello>This is note 2</Trello>
     </div>
   )
 }
 
-// You can note that in the case of the button, when it is passed
-// as children, the console.log() and alert() show it up as [object Object]
-// this is normal behaviour for some browsers. It is very difficult to log it out but possible.
 
 const content = document.getElementById('content');
 
