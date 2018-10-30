@@ -1,42 +1,76 @@
-class Counter extends React.Component {
-  // to store state properly, we need to call
-  // the class constructor and super
+class Trello extends React.Component {
   constructor(props) {
     super(props);
-
-    // initializing state with key num / value 0
     this.state = {
-      num: 0
+      editing: false
     }
   }
 
-  increase() {
-    // .setState is a method in React
-    // that allows us to directly mutate the state properties
-    // here we are overwriting `num` by adding 1
-    this.setState({ num: this.state.num + 1 })
+  edit() {
+    // when this method is invoked,
+    // it's gonna change the state
+    // which then triggers/invokes `render`
+    this.setState({ editing: true })
   }
 
-  decrease() {
-    // here we are overwriting `num` by decreasing 1
-    this.setState({ num: this.state.num - 1 })
+  save() {
+    // when this method is invoked,
+    // it's gonna change the state
+    // which then triggers/invokes `render`
+    this.setState({ editing: false })
   }
 
-  render() {
+  remove() {
+    // so far this is just a "dummy" method
+    console.log('Removing Note');
+  }
+
+  renderNormal() {
+    // if state is at editing === false,
+    // we display the below elements
     return (
       <div className="note">
-        <div className="text">State is holding: <strong>{this.state.num}</strong></div>
-        <button onClick={()=>this.increase()} className="btn-primary">Increase</button>
-        <button onClick={()=>this.decrease()} className="btn-danger">Decrease</button>
+        <div className="text">{this.props.children}</div>
+        <button onClick={()=>this.edit()} className="btn-primary">Edit</button>
+        <button onClick={()=>this.remove()} className="btn-danger">Remove</button>
       </div>
     )
   }
+
+  renderForm() {
+    // if state is at editing === true,
+    // we display the below elements
+    return (
+      <div className="note">
+        <textarea defaultValue={this.props.children}></textarea>
+        <button onClick={()=>this.save()} className="btn-success">Save</button>
+      </div>
+    )
+  }
+
+  render() {
+    // note the conditional render invoking
+    // the respective method, thus returning
+    // their respective elements
+    if(this.state.editing) {
+      return this.renderForm();
+    } else {
+      return this.renderNormal();
+    }
+  }
+
 }
 
-// since we're only using 1 component, there is
-// no need for a Layout "skeleton"
+// the simple Layout skeleton
+// to append multiple components on
+function Layout(props) {
+  return (
+    <div className="board">
+      <Trello>Note 1</Trello>
+      <Trello>Note 2</Trello>
+    </div>
+  )
+}
 
-
-const content = document.getElementById('content');
-
-ReactDOM.render( <Counter />, content );
+// finally calling React's DOM to render
+ReactDOM.render(<Layout />, document.getElementById('content'));
