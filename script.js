@@ -7,29 +7,20 @@ class Trello extends React.Component {
   }
 
   edit() {
-    // auto triggers/invokes `render`
     this.setState({ editing: true })
   }
 
   save() {
-    // extracting the value from the textarea element:
     const val = this.refs.newText.value;
-
-    // for now, let's just print it out:
     console.log("New Comment is:", val);
-
-    // auto triggers/invokes `render`
     this.setState({ editing: false })
   }
 
   remove() {
-    // so far this is just a "dummy" method
     console.log('Removing Note');
   }
 
   renderNormal() {
-    // if state is at editing === false,
-    // we display the below elements
     return (
       <div className="note">
         <div className="text">{this.props.children}</div>
@@ -40,9 +31,6 @@ class Trello extends React.Component {
   }
 
   renderForm() {
-    // if state is at editing === true,
-    // we display the below elements
-    // note how we've added a ref to the textarea
     return (
       <div className="note">
         <textarea defaultValue={this.props.children} ref="newText"></textarea>
@@ -52,9 +40,6 @@ class Trello extends React.Component {
   }
 
   render() {
-    // note the conditional render invoking
-    // the respective method, thus returning
-    // their respective elements
     if(this.state.editing) {
       return this.renderForm();
     } else {
@@ -64,15 +49,35 @@ class Trello extends React.Component {
 
 }
 
-// the simple Layout skeleton
-// to append multiple components on
-function Layout(props) {
-  return (
-    <div className="board">
-      <Trello>Note 1</Trello>
-      <Trello>Note 2</Trello>
-    </div>
-  )
+// changing our Layout from stateless function
+// to a stateful React Component
+class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      comments: [
+        "Note 1",
+        "Note 2",
+        "Note 3"
+      ]
+    }
+
+  }
+  
+  render() {
+    // we are going to map over
+    // the state in Layout
+    // and create the necessary Trellos
+    return (
+      <div className="board">
+        {
+          this.state.comments.map(( text,i ) => ( <Trello key={i}>{text}</Trello> ))
+        }
+        
+      </div>
+    )
+  }
 }
 
 // finally calling React's DOM to render
