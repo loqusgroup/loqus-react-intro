@@ -7,16 +7,18 @@ class Trello extends React.Component {
   }
 
   edit() {
-    // when this method is invoked,
-    // it's gonna change the state
-    // which then triggers/invokes `render`
+    // auto triggers/invokes `render`
     this.setState({ editing: true })
   }
 
   save() {
-    // when this method is invoked,
-    // it's gonna change the state
-    // which then triggers/invokes `render`
+    // extracting the value from the textarea element:
+    const val = this.refs.newText.value;
+
+    // for now, let's just print it out:
+    console.log("New Comment is:", val);
+
+    // auto triggers/invokes `render`
     this.setState({ editing: false })
   }
 
@@ -40,9 +42,10 @@ class Trello extends React.Component {
   renderForm() {
     // if state is at editing === true,
     // we display the below elements
+    // note how we've added a ref to the textarea
     return (
       <div className="note">
-        <textarea defaultValue={this.props.children}></textarea>
+        <textarea defaultValue={this.props.children} ref="newText"></textarea>
         <button onClick={()=>this.save()} className="btn-success">Save</button>
       </div>
     )
