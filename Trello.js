@@ -48,36 +48,3 @@ class Trello extends React.Component {
   }
 
 }
-
-// changing our Layout from stateless function
-// to a stateful React Component
-class Layout extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      comments: [
-        "Note 1",
-        "Note 2",
-        "Note 3"
-      ]
-    }
-
-  }
-  
-  render() {
-    // we are going to map over
-    // the state in Layout
-    // and create the necessary Trellos
-    return (
-      <div className="board">
-        {
-          this.state.comments.map(( text,i ) => ( <Trello key={i}>{text}</Trello> ))
-        }
-      </div>
-    )
-  }
-}
-
-// finally calling React's DOM to render
-ReactDOM.render(<Layout />, document.getElementById('content'));
