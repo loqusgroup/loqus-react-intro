@@ -74,7 +74,6 @@ class Layout extends React.Component {
         {
           this.state.comments.map(( text,i ) => ( <Trello key={i}>{text}</Trello> ))
         }
-        
       </div>
     )
   }
