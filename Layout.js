@@ -19,7 +19,7 @@ class Layout extends React.Component {
   // how it would need to be declared, but we're 
   // changing this method completely so the `map` method
   // is invoked within:
-  mapTrello(txt, iter) {
+  mapTrello() {
     return this.state.comments.map( (txt,iter) => (
       <Trello 
         key={iter}
