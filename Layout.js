@@ -2,23 +2,21 @@ class Layout extends React.Component {
   constructor(props) {
     super(props);
 
+    // we're flushing our preset comments
     this.state = {
-      comments: [
-        "Note 1",
-        "Note 2",
-        "Note 3"
-      ]
+      comments: []
     }
     
   }
 
-  // as pointed out in the previous branch,
-  // now that we need to also pass methods as props,
-  // the `map` in `render` would need passing arguments.
-  // You can see the commented line 53 in the `render` method,
-  // how it would need to be declared, but we're 
-  // changing this method completely so the `map` method
-  // is invoked within:
+  // uncomment the below lifecycle method
+  // and check the result in the browser
+
+  // componentDidMount() {
+  //   this.add('Edit This Note');
+  // }
+
+  
   mapTrello() {
     return this.state.comments.map( (txt,iter) => (
       <Trello 
@@ -45,14 +43,24 @@ class Layout extends React.Component {
     arr[i] = newText;
     this.setState({ comments: arr });
   }
+
+  add(txt) {
+    const arr = this.state.comments;
+    arr.push(txt);
+    this.setState({ comments: arr });
+  }
   
   render() {
     return (
       <div className="board">
-        {
-          // this.state.comments.map((a,b)=>this.mapTrello(a,b))
-          this.mapTrello()
-        }
+        <button onClick={()=>this.add("Edit Your Note")} className="btn-info">
+          Add New
+        </button>
+        <div className="comment">
+          {
+            this.mapTrello()
+          }
+        </div>
       </div>
     )
   }

@@ -10,6 +10,11 @@ class Trello extends React.Component {
     this.setState({ editing: true })
   }
 
+  clear(evt) {
+    this.refs.newText.value = '';
+    evt.target.closest('div').firstElementChild.focus();
+  }
+
   save(i) {
     const val = this.refs.newText.value;
     console.log(`Updating Comment ${i} with: ${val}`);
@@ -37,6 +42,7 @@ class Trello extends React.Component {
       <div className="note">
         <textarea defaultValue={this.props.children} ref="newText"></textarea>
         <button onClick={()=>this.save(this.props.index)} className="btn-success">Save</button>
+        <button onClick={(e)=>this.clear(e)} className="btn-default">Clear</button>
       </div>
     )
   }
