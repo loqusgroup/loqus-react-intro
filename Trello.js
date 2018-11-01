@@ -10,14 +10,17 @@ class Trello extends React.Component {
     this.setState({ editing: true })
   }
 
-  save() {
+  save(i) {
     const val = this.refs.newText.value;
-    console.log("New Comment is:", val);
+    console.log(`Updating Comment ${i} with: ${val}`);
+    this.props.updateToTrello(val,i)
     this.setState({ editing: false })
   }
 
-  remove() {
-    console.log('Removing Note');
+  remove(i) {
+    console.log('Removing Trello', i);
+    console.log(this.props);
+    this.props.removeToTrello(i);
   }
 
   renderNormal() {
@@ -25,7 +28,7 @@ class Trello extends React.Component {
       <div className="note">
         <div className="text">{this.props.children}</div>
         <button onClick={()=>this.edit()} className="btn-primary">Edit</button>
-        <button onClick={()=>this.remove()} className="btn-danger">Remove</button>
+        <button onClick={()=>this.remove(this.props.index)} className="btn-danger">Remove</button>
       </div>
     )
   }
@@ -34,7 +37,7 @@ class Trello extends React.Component {
     return (
       <div className="note">
         <textarea defaultValue={this.props.children} ref="newText"></textarea>
-        <button onClick={()=>this.save()} className="btn-success">Save</button>
+        <button onClick={()=>this.save(this.props.index)} className="btn-success">Save</button>
       </div>
     )
   }
