@@ -19,7 +19,6 @@ class Trello extends React.Component {
 
   remove(i) {
     console.log('Removing Trello', i);
-    console.log(this.props);
     this.props.removeToTrello(i);
   }
 
