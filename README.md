@@ -4,7 +4,7 @@ A quick course for newly recruited [Loqus](http://www.loqusgroup.com/) developer
 
 Here you can find the example project's code covered in the course. Start by:
 
-`git clone https://github.com/PixelWashAcademy/loqus-react.git`
+`git clone https://github.com/loqusgroup/loqus-react-intro.git`
 
 On each section covered, you'll need to change to the relevant code (*i.e.: changing/checkout the branch*):
 
